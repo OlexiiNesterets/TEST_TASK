@@ -20,7 +20,7 @@
 
         /* Изменилось ли количество товаров в данной карточке */
         if (($amount >= 0) && ($amount !== previousAmount)) {
-            
+
             /* Получаем разницу количества товаров в данной карточке */
             var amountDifference = $amount - previousAmount;
 
@@ -44,19 +44,13 @@
     });
 
     /* Фильтр по категориям */
-    $('.filter-box .select-control').change(function () {
+    $('.select-box .select-control').change(function () {
         var $this = $(this);
         if ($this.val() === '0') {
             $('.product-box__item').removeClass('hide-by-category');
-        } else if ($this.val() === '1') {
+        } else {
             $('.product-box__item').addClass('hide-by-category');
-            $('.products-box').find('.breakfast').removeClass('hide-by-category');
-        } else if ($this.val() === '2') {
-            $('.product-box__item').addClass('hide-by-category');
-            $('.products-box').find('.first-course').removeClass('hide-by-category');
-        } else if ($this.val() === '3') {
-            $('.product-box__item').addClass('hide-by-category');
-            $('.products-box').find('.garnish').removeClass('hide-by-category');
+            $('[data-item-type="' + $this.val() + '"]').removeClass('hide-by-category');
         }
     });
 
@@ -66,36 +60,15 @@
         var $product = $('.product-box__item');
         if ($this.val() === '0') {
             $product.removeClass('hide-by-price');
-        } else if ($this.val() === '30') {
+        } else {
             $product.addClass('hide-by-price');
             $product.each(function () {
-                if ( parseInt($(this).find('.products-box__price').text()) <= 30 ) {
+                if (parseInt($(this).find('.products-box__price').text()) <= $this.val()) {
                     $(this).removeClass('hide-by-price');
-                }
-            });
-        } else if ($this.val() === '50') {
-            $product.addClass('hide-by-price');
-            $product.each(function () {
-                if ( parseInt($(this).find('.products-box__price').text()) <= 50 ) {
-                    $(this).removeClass('hide-by-price');
-                }
-            });
-        } else if ($this.val() === '100') {
-            $product.addClass('hide-by-price');
-            $product.each(function () {
-                if ( parseInt($(this).find('.products-box__price').text()) <= 100 ) {
-                    $(this).removeClass('hide-by-price');
-                }
-            });
-        } else if ($this.val() === '150') {
-            $product.addClass('hide-by-price');
-            $product.each(function () {
-                if ( parseInt($(this).find('.products-box__price').text()) <= 150 ) {
-                    $(this).removeClass('hide-by-price');
+
                 }
             });
         }
-
     });
 
     /* Офрмить заказ */
